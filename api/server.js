@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 
-const UserRouter = require('../users/users-router.js');
+const ApiRouter = require('./api-router.js');
 
 const server = express();
 
@@ -12,6 +12,6 @@ server.get('/', (req, res) => {
     res.send('<h2>Welcome To My First Auth Project</h2>')
 });
 
-server.use('/api', UserRouter);
+server.use('/api', ApiRouter);
 
 module.exports = server;
