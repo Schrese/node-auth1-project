@@ -7,6 +7,8 @@ module.exports = {
     connection: {
       filename: './data/users.db3'
     }, 
+    fetchAsString: ['date'],
+    
     useNullAsDefault: true,
 
     migrations: {
