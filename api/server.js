@@ -1,8 +1,11 @@
 const express = require('express');
 const helmet = require('helmet');
 const session = require('express-session');
+const KnexSessionStore = require('connect-session-knex')(session);
 
 const ApiRouter = require('./api-router.js');
+
+const dbCon = require('../data/db-config.js');
 
 const server = express();
 
@@ -15,7 +18,14 @@ const sessionConfiguration = {
         httpOnly: true,
     },
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new KnexSessionStore({ 
+        knex: dbCon,
+        tablename: 'sessions',
+        sidfieldname: 'sid',
+        createtable: true,
+        clearInterval: 6000
+    })
 }
 
 server.use(helmet());
