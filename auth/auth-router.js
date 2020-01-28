@@ -51,6 +51,7 @@ router.post('/login', (req, res) => {
     Users.findBy(username)
         .then(user => {
             if (user && bc.compareSync(password, user.password)) {
+                req.session.username = username;
                 res.status(200).json({ message: `Welcome ${user.username}!` })
             } else {
                 res.status(401).json({ message: 'Invalid Credentials' })
