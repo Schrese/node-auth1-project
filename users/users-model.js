@@ -2,7 +2,8 @@ const db = require('../data/db-config.js');
 
 module.exports = {
     getUsers,
-    createUser
+    createUser,
+    findBy
 }
 
 function getUsers() {
@@ -19,4 +20,8 @@ function createUser(user) {
             const [id] = ids;
             return findById(id);
         })
+}
+
+function findBy(filter) {
+    return db('users').select('id', 'username', 'password').where('username', filter).first();
 }
