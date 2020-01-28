@@ -63,5 +63,18 @@ router.post('/login', (req, res) => {
         })
 })
 
+router.get('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy(err => {
+            if (err) {
+                res.status(500).json({ message: 'Unable to logout' })
+            } else {
+                res.status(200).json({ message: 'Come back anytime!' })
+            }
+        })
+    } else {
+        res.status(200).json({ message: 'not sure how you got here without loggin in first' })
+    }
+})
 
 module.exports = router;
