@@ -7,10 +7,11 @@ const router = express.Router();
 router.get('/', (req, res) => {
     Users.getUsers()
         .then(users => {
-            res.json(users);
+            res.status(200).json(users);
         })
         .catch(err => {
-            res.send(err)
+            console.log('error getting users', err)
+            res.status(500).json({ errorMessage: 'Could not get users' })
         })
 })
 
